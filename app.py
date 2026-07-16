@@ -68,64 +68,146 @@ model = load_model()
 @st.cache_data
 def load_teams():
 
-    ipl_teams = set()
-    t20i_teams = set()
+    # ------------------------------------------
+    # IPL FRANCHISES
+    # ------------------------------------------
 
-    # IPL Teams
-    for file in IPL_PATH.glob("*.json"):
+    ipl_teams = sorted([
+        "Chennai Super Kings",
+        "Mumbai Indians",
+        "Royal Challengers Bengaluru",
+        "Kolkata Knight Riders",
+        "Sunrisers Hyderabad",
+        "Delhi Capitals",
+        "Rajasthan Royals",
+        "Punjab Kings",
+        "Lucknow Super Giants",
+        "Gujarat Titans",
+        "Deccan Chargers",
+        "Pune Warriors",
+        "Rising Pune Supergiant",
+        "Kochi Tuskers Kerala",
+        "Gujarat Lions"
+    ])
 
-        try:
-            with open(
-                file,
-                "r",
-                encoding="utf-8"
-            ) as f:
+    # ------------------------------------------
+    # T20 INTERNATIONAL TEAMS
+    # ------------------------------------------
 
-                match = json.load(f)
+    t20i_teams = sorted([
+        "Argentina",
+        "Australia",
+        "Austria",
+        "Bahamas",
+        "Bahrain",
+        "Bangladesh",
+        "Belgium",
+        "Belize",
+        "Bermuda",
+        "Bhutan",
+        "Botswana",
+        "Brazil",
+        "Bulgaria",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "Cayman Islands",
+        "Chile",
+        "China",
+        "Cook Islands",
+        "Costa Rica",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Denmark",
+        "England",
+        "Estonia",
+        "Eswatini",
+        "Fiji",
+        "Finland",
+        "France",
+        "Gambia",
+        "Germany",
+        "Ghana",
+        "Gibraltar",
+        "Greece",
+        "Guernsey",
+        "Hong Kong",
+        "Hungary",
+        "ICC World XI",
+        "India",
+        "Indonesia",
+        "Iran",
+        "Ireland",
+        "Isle of Man",
+        "Israel",
+        "Italy",
+        "Ivory Coast",
+        "Japan",
+        "Jersey",
+        "Kenya",
+        "Kuwait",
+        "Lesotho",
+        "Luxembourg",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Malta",
+        "Mexico",
+        "Mongolia",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nepal",
+        "Netherlands",
+        "New Zealand",
+        "Nigeria",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Panama",
+        "Papua New Guinea",
+        "Philippines",
+        "Portugal",
+        "Qatar",
+        "Romania",
+        "Rwanda",
+        "Samoa",
+        "Saudi Arabia",
+        "Scotland",
+        "Serbia",
+        "Seychelles",
+        "Sierra Leone",
+        "Singapore",
+        "Slovenia",
+        "South Africa",
+        "South Korea",
+        "Spain",
+        "Sri Lanka",
+        "St Helena",
+        "Suriname",
+        "Sweden",
+        "Switzerland",
+        "Tanzania",
+        "Thailand",
+        "Timor-Leste",
+        "Turkey",
+        "Turks and Caicos Islands",
+        "Uganda",
+        "United Arab Emirates",
+        "United States of America",
+        "Uzbekistan",
+        "Vanuatu",
+        "West Indies",
+        "Zambia",
+        "Zimbabwe"
+    ])
 
-            teams = (
-                match
-                .get("info", {})
-                .get("teams", [])
-            )
+    return ipl_teams, t20i_teams
 
-            for team in teams:
-                ipl_teams.add(team)
-
-        except:
-            continue
-
-    # T20I Teams
-    for file in T20I_PATH.glob("*.json"):
-
-        try:
-            with open(
-                file,
-                "r",
-                encoding="utf-8"
-            ) as f:
-
-                match = json.load(f)
-
-            teams = (
-                match
-                .get("info", {})
-                .get("teams", [])
-            )
-
-            for team in teams:
-                t20i_teams.add(team)
-
-        except:
-            continue
-
-    return (
-        sorted(list(ipl_teams)),
-        sorted(list(t20i_teams))
-    )
 
 ipl_teams, t20i_teams = load_teams()
-
 # ==================================================
 # SIDEBAR NAVIGATION
 # ==================================================
