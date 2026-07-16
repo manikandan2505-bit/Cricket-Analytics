@@ -1,0 +1,38 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+
+# IDE files
+.idea/
+.vscode/
+
+# Environment variables
+.env
+
+# Jupyter notebooks cache
+.ipynb_checkpoints/
+
+# Dataset files
+data/
+
+# Large exports
+exports/win_probability_model.pkl
+
+# Temporary files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit cache
+.streamlit/
+
+# Power BI temporary files
+*.pbix.autorecover
