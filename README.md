@@ -47,5 +47,11 @@ app.py
 requirements.txt
 
 ## Author
-Manikandan K
+Manikandan K|
 BCA 2026
+
+GitHub Repository:
+https://github.com/manikandan2505-bit/Cricket-Analytics
+
+Streamlit Application:
+https://cricket-analytics-h6zqswjaxzrvq3ekn6wj3g.streamlit.app/
