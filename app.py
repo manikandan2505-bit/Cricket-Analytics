@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import json
+import gdown
 from pathlib import Path
 
 # ==================================================
@@ -18,20 +19,44 @@ st.set_page_config(
 # PATHS
 # ==================================================
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
-MODEL_PATH = BASE_DIR / "exports" / "win_probability_model.pkl"
+EXPORTS_DIR = BASE_DIR / "exports"
+EXPORTS_DIR.mkdir(exist_ok=True)
+
+MODEL_PATH = EXPORTS_DIR / "win_probability_model.pkl"
 
 IPL_PATH = BASE_DIR / "data" / "raw" / "ipl"
-
 T20I_PATH = BASE_DIR / "data" / "raw" / "t20i"
 
+# ==================================================
+# GOOGLE DRIVE MODEL
+# ==================================================
+
+MODEL_FILE_ID = "1SQ91EREBb-7XAcaVxvAb5WJ_y2Zzt-Io"
+
+MODEL_URL = (
+    f"https://drive.google.com/uc?id={MODEL_FILE_ID}"
+)
 # ==================================================
 # LOAD MODEL
 # ==================================================
 
 @st.cache_resource
 def load_model():
+
+    if not MODEL_PATH.exists():
+
+        with st.spinner(
+            "Downloading machine learning model for the first time..."
+        ):
+
+            gdown.download(
+                MODEL_URL,
+                str(MODEL_PATH),
+                quiet=False
+            )
+
     return joblib.load(MODEL_PATH)
 
 model = load_model()
